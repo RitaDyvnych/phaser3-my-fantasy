@@ -42,12 +42,19 @@ class Scene3 extends Phaser.Scene {
     this.bcg_sea = this.add.image(155, 450, "bcg_sea").setAlpha(0);
 
     this.progress = this.add.image(300, 30, "progress1").setAlpha(0);
-    this.choose = this.add.image(-300, 30, "choose_your_bag");
+    this.choose = this.add.image(300, 30, "choose_your_bag").setAlpha(0);
     this.cursor = this.add.image(200, 1100, "cursor").setDepth(3);
+
+    this.manText = dress === "dress1" ? 
+        this.add.image(-300, 500, "man-text-win").setScale(0.5).setDepth(3).setAlpha(0)
+        :this.add.image(-300, 500, "man-text-loose").setScale(0.5).setDepth(3).setAlpha(0);
+    this.btnPlay = dress === "dress1" ? 
+        this.add.image(300, 800, "btn_play_now").setDepth(4).setAlpha(0)
+        :this.add.image(300, 800, "btn_retry").setDepth(4).setAlpha(0);
 
     let womanAnimation = this.tweens.add({
       targets: this.woman,
-      delay: 0,
+      delay: 500,
       duration: 600,
       alpha: 1,
       ease: "Cubic",
@@ -62,7 +69,8 @@ class Scene3 extends Phaser.Scene {
 
     let progressAnimation = this.tweens.add({
       targets: this.progress,
-      duration: 700,
+      delay: 300,
+      duration: 600,
       alpha: 1,
       // completeDelay: 500,
       onComplete: function (progressAnimation, targets) {
@@ -75,8 +83,7 @@ class Scene3 extends Phaser.Scene {
       targets: this.choose,
       delay: 1000,
       duration: 600,
-      x: 300,
-      ease: "Cubic",
+      alpha: 1,
     });
 
     this.bag1.setInteractive().on("pointerdown", function (pointer, localX, localY, event) {
@@ -180,7 +187,7 @@ class Scene3 extends Phaser.Scene {
     this.progress.setAlpha(0);
     this.progress = this.add.image(300, 30, "progress2").setAlpha(0);
     this.choose.setAlpha(0);
-    this.choose = this.add.image(-300, 35, "choose_your_accessory");
+    this.choose = this.add.image(300, 35, "choose_your_accessory").setAlpha(0);
 
     let progressAnimation2 = this.tweens.add({
       targets: this.progress,
@@ -197,8 +204,7 @@ class Scene3 extends Phaser.Scene {
       targets: this.choose,
       delay: 900,
       duration: 700,
-      x: 300,
-      ease: "Cubic",
+      alpha: 1,
     });
   }
   accessoryChoose(item1, item2, item3, item4){
@@ -277,16 +283,13 @@ class Scene3 extends Phaser.Scene {
       targets: this.choose,
       delay: 900,
       duration: 700,
-      x: 300,
-      ease: "Cubic",
+      alpha: 1,
     });
   }
 
   placeChoose(bcg){
     this.count = 200;
     this.man = this.add.image(300, 465, "man2").setAlpha(0).setDepth(1);
-    this.manText = this.add.image(300, 500, "man-text-win").setScale(0.5).setDepth(3).setAlpha(0);
-    this.btnPlay = this.add.image(300, 800, "btn_play_now").setDepth(4).setAlpha(0);
 
     this.place1.setAlpha(0);
     this.place2.setAlpha(0);
@@ -314,11 +317,13 @@ class Scene3 extends Phaser.Scene {
     let manTextAnimation = this.tweens.add({
       targets: this.manText,
       delay: 1300,
-      duration: 1500,
+      duration: 1800,
       alpha: 1,
-      // onComplete: function (manTextAnimation, targets) {
-      //   targets[0].x = -500;
-      // },
+      x: 300,
+      ease: "Cubic",
+      onComplete: function (animateTextMan, targets) {
+        targets[0].x = -500;
+      },
     });
 
     let btnPlayAnimation = this.tweens.add({
@@ -326,7 +331,7 @@ class Scene3 extends Phaser.Scene {
       delay: 2800,
       duration: 3000,
       alpha: 1,
-      ease: "Bounce",
+      ease: "Cubic",
     });
 
     this.btnPlay.setInteractive();

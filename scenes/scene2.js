@@ -14,7 +14,7 @@ class Scene2 extends Phaser.Scene {
   create(){
     this.bcg = this.add.image(155, 450, "bcg_room").setTint(0x000000).setAlpha(0);
     this.woman = this.add.image(-300, 470, "woman2");
-    this.choose = this.add.image(-300, 30, "choose_your_dress");
+    this.choose = this.add.image(300, 30, "choose_your_dress").setAlpha(0);
     this.dress1 = this.add.image(160, 700, "dress1").setScale(0.5).setAlpha(0);
     this.dress2 = this.add.image(440, 700, "dress2").setScale(0.5).setAlpha(0);
     this.cursor = this.add.image(200, 1100, "cursor");
@@ -49,8 +49,7 @@ class Scene2 extends Phaser.Scene {
       targets: this.choose,
       delay: 500,
       duration: 1000,
-      x: 300,
-      ease: "Cubic",
+      alpha: 1,
     });
 
     let dressAnimation = this.tweens.add({
@@ -58,9 +57,6 @@ class Scene2 extends Phaser.Scene {
       delay: 1000,
       duration: 1000,
       alpha: 1,
-      // onStart: function () {
-      //   // this.parent.scene.bcg.setAlpha(0);
-      // },
     });
 
     let cursorTopAnimation = this.tweens.add({
@@ -115,29 +111,22 @@ class Scene2 extends Phaser.Scene {
     this.dress1.setAlpha(0);
     this.dress2.setAlpha(0);
 
-    let womanAnimation2 = this.tweens.add({
-      targets: this.woman,
-      duration: 500,
-    });
-
-    // if (this.scale.orientation === Phaser.Scale.PORTRAIT) {
-      this.progress = this.add.image(300, 30, "progress0").setAlpha(0);
-    // } else {
-    //   this.progress = this.add
-    //     .image(300, 265, "progress0")
-    //     .setScale(1)
-    //     .setAlpha(0);
-    // }
+    this.progress = this.add.image(300, 30, "progress0").setAlpha(0);
 
     let progressAnimation = this.tweens.add({
       targets: this.progress,
-      duration: 1000,
+      duration: 300,
       alpha: 1,
-      // completeDelay: 500,
+      completeDelay: 300,
       onComplete: function (progressAnimation, targets) {
         targets[0].x = -500;
         targets[0].y = -500;
       },
+    });
+
+    let womanAnimation2 = this.tweens.add({
+      targets: this.woman,
+      duration: 1500,
     });
   }
 

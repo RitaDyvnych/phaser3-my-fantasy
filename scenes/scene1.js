@@ -94,7 +94,6 @@ class Scene1 extends Phaser.Scene {
 
   update(){
     this.count+=1;
-    // console.log(this.count);
     this.onOrientationChange(
       this.orientation,
       this.man,
